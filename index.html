@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ListGenius – Etsy Listing Prompt Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fdece4;
+      padding: 30px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #f36f45;
+    }
+    .output {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 ListGenius</h1>
+    <p>Generate Etsy listing prompts for ChatGPT</p>
+    <label>Product Name:</label>
+    <input id="productName" placeholder="e.g., Hand-painted ceramic mug">
+
+    <label>Short Product Description:</label>
+    <textarea id="productDesc" placeholder="Brief details, materials, style, size..."></textarea>
+
+    <button onclick="generatePrompt()">Generate Prompt</button>
+    <button onclick="copyPrompt()">Copy Prompt</button>
+
+    <div id="output" class="output"></div>
+  </div>
+
+  <script>
+    function generatePrompt() {
+      const name = document.getElementById('productName').value.trim();
+      const desc = document.getElementById('productDesc').value.trim();
+      const prompt = `You are ListGenius, an Etsy SEO assistant. I will give you a short product description and your job is to generate:
+
+1. An SEO-optimized product title (max 140 characters)
+2. 13 Etsy tags
+3. A compelling product description formatted with bullet points and short paragraphs
+4. Suggested price range (in NZD) based on similar listings
+5. Suggested Etsy categories
+
+The product is: ${name} — ${desc}`;
+      document.getElementById('output').textContent = prompt;
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('output').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Prompt copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
 
