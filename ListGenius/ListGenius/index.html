@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ListGenius - Etsy Listing Prompt Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdece4;
+            padding: 30px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #f36f45;
+        }
+        .output {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 ListGenius</h1>
+        <p>Generate Etsy listing prompts for ChatGPT</p>
+
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName">
+
+        <label for="description">Short Product Description:</label>
+        <textarea id="description" rows="4"></textarea>
+
+        <button onclick="generatePrompt()">Generate Prompt</button>
+        <button onclick="copyToClipboard()">Copy Prompt</button>
+
+        <h3>Your Prompt:</h3>
+        <textarea id="output" class="output" rows="10" readonly>Waiting for input...</textarea>
+    </div>
+
+    <script>
+        function generatePrompt() {
+            var name = document.getElementById("productName").value;
+            var desc = document.getElementById("description").value;
+            var prompt = "You are ListGenius, an Etsy SEO assistant. I will give you a short product description and your job is to generate:\n" +
+                         "1. An SEO-optimized product title (max 140 characters)\n" +
+                         "2. 13 Etsy tags\n" +
+                         "3. A compelling product description formatted with bullet points and short paragraphs\n" +
+                         "4. Suggested price range (in NZD) based on similar listings\n" +
+                         "5. Suggested Etsy categories\n\n" +
+                         "The product is: " + name + " — " + desc;
+            document.getElementById("output").value = prompt;
+        }
+
+        function copyToClipboard() {
+            var copyText = document.getElementById("output");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("Prompt copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
+
